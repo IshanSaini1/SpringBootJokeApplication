@@ -2,6 +2,8 @@ package com.wolfspring.starterpack.controllers;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wolfspring.starterpack.services.JokeService;
 
@@ -13,8 +15,10 @@ public class JokeController {
 		super();
 		this.jokeService = jokeService;
 	}
-
-	public String returnJoke() {
-		return jokeService.getJoke();
+	
+	@RequestMapping("/joke")
+	public String returnJoke(Model model) {
+		model.addAttribute("joke", jokeService.getJoke());
+		return "/jokes/norris";
 	}
 }
